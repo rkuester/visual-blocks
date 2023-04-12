@@ -119,9 +119,9 @@ def Server(
   def inference():
     """Handler for the generic api endpoint."""
     log('This is the inference function again')
-    input_tensors = [_json_to_ndarray(x) for x in request.json['tensors']]
     result = {}
     try:
+      input_tensors = [_json_to_ndarray(x) for x in request.json['tensors']]
       if generic_inference_fn is None:
         result = {'error': 'generic_inference_fn parameter is not set'}
       else:
