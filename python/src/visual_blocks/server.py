@@ -118,7 +118,7 @@ def Server(
   @app.route('/apipost/inference', methods=['POST'])
   def inference():
     """Handler for the generic api endpoint."""
-    log('This is the inference function')
+    log('This is the inference function again')
     input_tensors = [_json_to_ndarray(x) for x in request.json['tensors']]
     result = {}
     try:
