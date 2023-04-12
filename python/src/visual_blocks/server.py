@@ -129,9 +129,11 @@ def Server(
         result['tensors'] = [_ndarray_to_json(x) for x in output_tensors]
     except Exception as e:
       result = {'error': str(e)}
+      log(f'inference() building error: {result}')
     finally:
       resp = make_response(json.dumps(result))
       resp.headers['Content-Type'] = 'application/json'
+      log(f'inference() returning: {resp}')
       return resp
 
   # Note: using "/api/..." for POST requests is not allowed.
