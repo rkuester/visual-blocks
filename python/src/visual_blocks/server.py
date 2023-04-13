@@ -128,10 +128,10 @@ def Server(
       else:
         output_tensors = generic_inference_fn(input_tensors)
         result['tensors'] = [_ndarray_to_json(x) for x in output_tensors]
-    except BaseException as e:
-      trace = 'foo' # ''.join(traceback.format_exception(e))
-      result = {'error': trace}
-      log(f'inference() building exception with trace: {trace}')
+    except Exception as e:
+      msg = ''.join(traceback.format_exception(type(e), e, e.__traceback__))
+      result = {'error': msg}
+      log(f'inference() building exception with msg: {msg}')
     finally:
       resp = make_response(json.dumps(result))
       resp.headers['Content-Type'] = 'application/json'
