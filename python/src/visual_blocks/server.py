@@ -131,6 +131,7 @@ def Server(
     except Exception as e:
       trace = ''.join(traceback.format_exception(e))
       result = {'error': trace}
+      log(f'inference() building exception with trace: {trace}')
     finally:
       resp = make_response(json.dumps(result))
       resp.headers['Content-Type'] = 'application/json'
