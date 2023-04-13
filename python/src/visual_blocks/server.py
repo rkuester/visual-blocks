@@ -17,6 +17,7 @@ import requests
 import shutil
 import sys
 import threading
+import traceback
 import urllib.parse
 import zipfile
 
@@ -128,8 +129,8 @@ def Server(
         output_tensors = generic_inference_fn(input_tensors)
         result['tensors'] = [_ndarray_to_json(x) for x in output_tensors]
     except Exception as e:
-      result = {'error': str(e)}
-      log(f'inference() building error: {result}')
+      trace = ''.join(traceback.format_exception(e))
+      result = {'error': trace}
     finally:
       resp = make_response(json.dumps(result))
       resp.headers['Content-Type'] = 'application/json'
