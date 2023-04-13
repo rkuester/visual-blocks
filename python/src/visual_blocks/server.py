@@ -129,13 +129,13 @@ def Server(
         output_tensors = generic_inference_fn(input_tensors)
         result['tensors'] = [_ndarray_to_json(x) for x in output_tensors]
     except BaseException as e:
-      trace = ''.join(traceback.format_exception(e))
+      trace = 'foo' # ''.join(traceback.format_exception(e))
       result = {'error': trace}
       log(f'inference() building exception with trace: {trace}')
     finally:
       resp = make_response(json.dumps(result))
       resp.headers['Content-Type'] = 'application/json'
-      log(f'inference() returning: {resp}')
+      log(f'inference() returning resp: {resp}; result: {result}')
       return resp
 
   # Note: using "/api/..." for POST requests is not allowed.
